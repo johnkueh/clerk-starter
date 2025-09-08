@@ -1,4 +1,5 @@
 import { router, orgProcedure } from "../trpc";
+import { z } from "zod/v4";
 
 export const projectRouter = router({
   list: orgProcedure.query(async ({ ctx }) => {
@@ -8,4 +9,14 @@ export const projectRouter = router({
       },
     });
   }),
+  create: orgProcedure
+    .input(z.object({ name: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.project.create({
+        data: {
+          name: input.name,
+          orgId: ctx.auth.orgId,
+        },
+      });
+    }),
 });

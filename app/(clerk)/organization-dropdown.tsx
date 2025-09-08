@@ -2,9 +2,30 @@
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { OrganizationSwitcher, useOrganization } from "@clerk/nextjs";
+import { useEffect, useRef } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function OrganizationDropdown() {
-  const { isLoaded } = useOrganization();
+  const { isLoaded, organization } = useOrganization();
+  const organizationId = organization?.id;
+  const queryClient = useQueryClient();
+  const prevOrgIdRef = useRef<string | undefined>(undefined);
+
+  useEffect(() => {
+    // Only run after initial load is complete
+    if (!isLoaded) return;
+
+    // Check if organization actually changed
+    if (prevOrgIdRef.current !== undefined && prevOrgIdRef.current !== organizationId) {
+      // Clear all queries when switching organizations
+      // This ensures a clean slate for the new organization context
+      queryClient.resetQueries();
+    }
+
+    // Update the ref for next comparison
+    prevOrgIdRef.current = organizationId;
+  }, [organizationId, isLoaded, queryClient]);
+
   if (!isLoaded) {
     return (
       <div className="flex items-center gap-2">

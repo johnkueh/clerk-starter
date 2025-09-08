@@ -10,23 +10,28 @@ export function ProjectsGrid() {
   if (error) return <div>Error: {error.message}</div>;
   if (!projects)
     return (
-      <div className="flex gap-4">
-        <Skeleton className="w-72 aspect-video rounded-md" />
-        <Skeleton className="w-72 aspect-video rounded-md" />
-        <Skeleton className="w-72 aspect-video rounded-md" />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+        <Skeleton className="aspect-video rounded-md" />
+        <Skeleton className="aspect-video rounded-md" />
+        <Skeleton className="aspect-video rounded-md" />
       </div>
     );
 
   return (
-    <div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
       <Link
         href="/projects/new"
-        className="w-72 aspect-video rounded-md flex items-center justify-center bg-gray-100 text-gray-500 text-sm hover:text-gray-700 cursor-pointer"
+        className="aspect-video rounded-md flex items-center justify-center bg-gray-100 text-gray-500 text-sm hover:text-gray-700 cursor-pointer"
       >
         Create Project
       </Link>
       {projects.map((project) => (
-        <div key={project.id}>{project.name}</div>
+        <div
+          className="aspect-video rounded-md flex items-center justify-center bg-gray-100 text-gray-500 text-sm hover:text-gray-700 cursor-pointer"
+          key={project.id}
+        >
+          {project.name}
+        </div>
       ))}
     </div>
   );
