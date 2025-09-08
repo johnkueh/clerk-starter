@@ -15,7 +15,7 @@ const eslintConfig = [
   ...compat.plugins("prettier"),
   {
     ignores: [
-      "lib/generated/**",
+      "prisma/generated/**",
       "next-env.d.ts",
       "node_modules/**",
       ".next/**",

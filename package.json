@@ -8,7 +8,8 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "check": "pnpm lint --fix && pnpm tsc --noEmit"
+    "check": "pnpm lint --fix && pnpm tsc --noEmit",
+    "db:up": "docker-compose -f prisma/docker-compose.yml up -d"
   },
   "dependencies": {
     "@clerk/elements": "^0.23.61",

@@ -1,27 +1,36 @@
-1. install zod, @prisma/client, and prisma (devDependencies)
-2. Run `pnpm prisma init`
-3. Add docker-compose.yml, run `docker-compose up -d`
-4. Run `pnpm prisma db push`
+# Add Prisma to Next.js App
 
+---
+
+## 🚀 Quick Start
+
+This project includes a pre-configured Prisma setup with PostgreSQL. Follow these steps to set up your database.
+
+## 1. Installation
+
+Install the required packages:
+
+```bash
+pnpm add zod @prisma/client
+pnpm add -D prisma
 ```
-services:
-  postgres:
-    image: postgres:16-alpine
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: pagelink_dev
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
 
-volumes:
-  postgres_data:
+## 2. Initialize Prisma
 
+```bash
+pnpm prisma init
+```
+
+## 3. Start PostgreSQL Database
+
+The docker-compose.yml file is already configured in the prisma folder. Start the database:
+
+```bash
+pnpm db:up
+```
+
+## 4. Push Schema to Database
+
+```bash
+pnpm prisma db push
 ```
