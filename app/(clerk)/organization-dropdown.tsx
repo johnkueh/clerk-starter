@@ -4,6 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { OrganizationSwitcher, useOrganization } from "@clerk/nextjs";
 import { useEffect, useRef } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { clerkConfig } from "./config";
 
 export function OrganizationDropdown() {
   const { isLoaded, organization } = useOrganization();
@@ -40,9 +41,9 @@ export function OrganizationDropdown() {
 
   return (
     <OrganizationSwitcher
-      afterCreateOrganizationUrl="/dashboard"
-      afterSelectOrganizationUrl="/dashboard"
-      afterLeaveOrganizationUrl="/dashboard"
+      afterCreateOrganizationUrl={clerkConfig.redirectAfterOrganizationChanged}
+      afterSelectOrganizationUrl={clerkConfig.redirectAfterOrganizationChanged}
+      afterLeaveOrganizationUrl={clerkConfig.redirectAfterOrganizationChanged}
       appearance={{
         elements: {
           organizationSwitcherTrigger: {
