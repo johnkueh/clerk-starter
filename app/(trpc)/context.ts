@@ -1,6 +1,5 @@
 import { headers } from "next/headers";
 import { auth } from "@clerk/nextjs/server";
-import { PrismaClient } from "@/lib/generated/prisma";
 import { prisma } from "@/prisma/client";
 
 export async function createTRPCContext(opts?: { headers?: Headers }) {

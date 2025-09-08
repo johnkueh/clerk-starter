@@ -16,7 +16,10 @@ export function OrganizationDropdown() {
     if (!isLoaded) return;
 
     // Check if organization actually changed
-    if (prevOrgIdRef.current !== undefined && prevOrgIdRef.current !== organizationId) {
+    if (
+      prevOrgIdRef.current !== undefined &&
+      prevOrgIdRef.current !== organizationId
+    ) {
       // Clear all queries when switching organizations
       // This ensures a clean slate for the new organization context
       queryClient.resetQueries();

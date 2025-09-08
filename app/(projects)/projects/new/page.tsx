@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowLeftIcon } from "lucide-react";
+import { ArrowLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { CreateProjectForm } from "./create-project-form";
 
