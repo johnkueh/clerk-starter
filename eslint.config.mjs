@@ -14,7 +14,18 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
   ...compat.plugins("prettier"),
   {
-    ignores: ["src/generated/**", "next-env.d.ts"],
+    ignores: [
+      "src/generated/**",
+      "next-env.d.ts",
+      "node_modules/**",
+      ".next/**",
+      "dist/**",
+      "build/**",
+      ".cache/**",
+      "coverage/**",
+      ".turbo/**",
+      "*.min.js",
+    ],
   },
   {
     plugins: {
