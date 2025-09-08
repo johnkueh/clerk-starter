@@ -1,7 +1,8 @@
 export const clerkConfig = {
   protectedRoutes: [
+    // Add all protected routes here
+    "/dashboard(.*)",
     "/projects(.*)",
-    // Add other protected routes here
   ],
   redirectAfterOrganizationChanged: "/dashboard",
 };
