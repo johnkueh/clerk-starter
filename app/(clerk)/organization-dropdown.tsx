@@ -22,14 +22,14 @@ export function OrganizationDropdown() {
       appearance={{
         elements: {
           organizationSwitcherTrigger: {
-            paddingLeft: 0,
+            paddingLeft: 4,
           },
           organizationPreviewMainIdentifier: {
             fontSize: 14,
           },
           avatarBox: {
-            width: 28,
-            height: 28,
+            width: 24,
+            height: 24,
           },
         },
       }}

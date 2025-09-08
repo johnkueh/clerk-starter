@@ -1,7 +1,7 @@
-import { router, protectedProcedure } from "../trpc";
+import { router, authedProcedure } from "../trpc";
 
 export const userRouter = router({
-  currentSession: protectedProcedure.query(async ({ ctx }) => {
+  currentSession: authedProcedure.query(async ({ ctx }) => {
     return {
       id: ctx.auth.userId,
       orgId: ctx.auth.orgId,

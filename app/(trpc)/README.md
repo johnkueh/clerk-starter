@@ -45,7 +45,7 @@ The tRPC context automatically includes Clerk authentication:
 
 ```typescript
 // In any protected procedure, you have access to:
-protectedProcedure.query(({ ctx }) => {
+authedProcedure.query(({ ctx }) => {
   const userId = ctx.auth.userId;
   const orgId = ctx.auth.orgId;
   const orgRole = ctx.auth.orgRole;
