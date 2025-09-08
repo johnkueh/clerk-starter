@@ -1,61 +1,38 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useAuth, useOrganization, useUser } from "@clerk/nextjs";
-import {
-  ChevronDown,
-  SettingsIcon,
-  Users,
-  ChevronsUpDownIcon,
-  Plus,
-  LogOutIcon,
-} from "lucide-react";
-import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
+import { OrganizationSwitcher, useOrganization } from "@clerk/nextjs";
 
 export function OrganizationDropdown() {
-  const { organization } = useOrganization();
+  const { isLoaded } = useOrganization();
+  if (!isLoaded) {
+    return (
+      <div className="flex items-center gap-2">
+        <Skeleton className="bg-gray-200 w-[28px] h-[28px] rounded-sm" />
+        <Skeleton className="bg-gray-200 w-20 h-[28px] rounded-md" />
+      </div>
+    );
+  }
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          className="justify-between min-w-[150px] max-w-[200px]"
-        >
-          <span className="truncate mr-1">{organization?.name}</span>
-          <ChevronDown className="h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[200px]">
-        <DropdownMenuLabel className="font-normal">
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium">{organization?.name}</span>
-          </div>
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link
-            href="/organization/settings"
-            className="flex items-center gap-2"
-          >
-            <SettingsIcon className="w-4 h-4" />
-            Organization settings
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/organization/switch" className="flex items-center gap-2">
-            <ChevronsUpDownIcon className="w-4 h-4" />
-            Switch organization
-          </Link>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <OrganizationSwitcher
+      afterCreateOrganizationUrl="/dashboard"
+      afterSelectOrganizationUrl="/dashboard"
+      afterLeaveOrganizationUrl="/dashboard"
+      appearance={{
+        elements: {
+          organizationSwitcherTrigger: {
+            paddingLeft: 0,
+          },
+          organizationPreviewMainIdentifier: {
+            fontSize: 14,
+          },
+          avatarBox: {
+            width: 28,
+            height: 28,
+          },
+        },
+      }}
+    />
   );
 }

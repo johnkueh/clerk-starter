@@ -1,31 +1,38 @@
-import Link from "next/link";
 import { UserDropdown } from "../(clerk)/user-dropdown";
+import Link from "next/link";
 import { OrganizationDropdown } from "../(clerk)/organization-dropdown";
-import { api } from "../(trpc)/query-client";
-import { SignOutButton } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";
-import CurrentUser from "./current-session";
 
 export default async function DashboardPage() {
   return (
-    <div className="min-h-screen p-4">
-      <nav className="flex justify-between items-center">
-        <Link href="/">Home</Link>
-        <div className="flex items-center gap-2">
+    <div className="min-h-screen">
+      <header className="bg-gray-50">
+        <div className="h-14 flex items-center justify-between px-6 border-b border-gray-200">
           <OrganizationDropdown />
           <UserDropdown />
         </div>
-      </nav>
 
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-4">Dashboard</h1>
-        <CurrentUser />
-        <div className="mt-8">
-          <SignOutButton>
-            <Button variant="outline">Sign Out</Button>
-          </SignOutButton>
+        {/* Navigation Tabs */}
+        <div className="px-6 border-b border-gray-200">
+          <nav className="flex gap-6">
+            <Link
+              href="/dashboard"
+              className="py-3 text-sm text-gray-700 hover:text-gray-700 border-b-1 border-blue-500"
+            >
+              Projects
+            </Link>
+          </nav>
         </div>
-      </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="px-6 py-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Page Title with Environment Badge */}
+          <div className="flex items-center justify-between mb-8">
+            <h1 className="text-2xl font-semibold text-gray-900">Projects</h1>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
