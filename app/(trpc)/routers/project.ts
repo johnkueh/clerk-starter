@@ -1,7 +1,7 @@
-import { router, orgProcedure } from "../trpc";
+import { createTRPCRouter, orgProcedure } from "../init";
 import { z } from "zod/v4";
 
-export const projectRouter = router({
+export const projectRouter = createTRPCRouter({
   list: orgProcedure.query(async ({ ctx }) => {
     return ctx.db.project.findMany({
       where: {

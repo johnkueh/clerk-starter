@@ -12,7 +12,7 @@ import {
   FormDescription,
   FormMessage,
 } from "@/components/ui/form";
-import { api } from "@/app/(trpc)/query-client";
+import { api } from "@/app/(trpc)/react";
 import { SubmitButton } from "@/components/submit-button";
 import { useRouter } from "next/navigation";
 

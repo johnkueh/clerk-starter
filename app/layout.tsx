@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@/app/(clerk)/clerk-provider";
-import { TRPCQueryProvider } from "./(trpc)/query-provider";
+import { TRPCProvider } from "./(trpc)/react";
 
 export const metadata: Metadata = {
   title: "Hello World",
@@ -15,11 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <TRPCQueryProvider>
+      <TRPCProvider>
         <html lang="en">
           <body>{children}</body>
         </html>
-      </TRPCQueryProvider>
+      </TRPCProvider>
     </ClerkProvider>
   );
 }

@@ -1,6 +1,6 @@
-import { router, authedProcedure } from "../trpc";
+import { createTRPCRouter, authedProcedure } from "../init";
 
-export const userRouter = router({
+export const userRouter = createTRPCRouter({
   currentSession: authedProcedure.query(async ({ ctx }) => {
     return {
       id: ctx.auth.userId,

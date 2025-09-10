@@ -1,21 +1,13 @@
 "use client";
 
-import { api } from "@/app/(trpc)/query-client";
+import { api } from "@/app/(trpc)/react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 
 export function ProjectsGrid() {
-  const { data: projects, error } = api.project.list.useQuery();
+  const [projects] = api.project.list.useSuspenseQuery();
 
-  if (error) return <div>Error: {error.message}</div>;
-  if (!projects)
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
-        <Skeleton className="aspect-video rounded-md" />
-        <Skeleton className="aspect-video rounded-md" />
-        <Skeleton className="aspect-video rounded-md" />
-      </div>
-    );
+  if (projects.length === 0) return <div>No projects found</div>;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
@@ -33,6 +25,16 @@ export function ProjectsGrid() {
           {project.name}
         </div>
       ))}
+    </div>
+  );
+}
+
+export function ProjectsGridLoading() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+      <Skeleton className="aspect-video rounded-md" />
+      <Skeleton className="aspect-video rounded-md" />
+      <Skeleton className="aspect-video rounded-md" />
     </div>
   );
 }

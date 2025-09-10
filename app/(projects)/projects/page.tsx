@@ -1,4 +1,5 @@
-import { ProjectsGrid } from "../projects-grid";
+import { Suspense } from "react";
+import { ProjectsGrid, ProjectsGridLoading } from "../projects-grid";
 
 export default async function ProjectsPage() {
   return (
@@ -7,7 +8,9 @@ export default async function ProjectsPage() {
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-2xl font-semibold text-gray-900">Projects</h1>
         </div>
-        <ProjectsGrid />
+        <Suspense fallback={<ProjectsGridLoading />}>
+          <ProjectsGrid />
+        </Suspense>
       </div>
     </main>
   );
