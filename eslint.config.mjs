@@ -1,21 +1,19 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
 import unusedImports from "eslint-plugin-unused-imports";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import prettier from "eslint-plugin-prettier";
 
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+  baseDirectory: import.meta.dirname,
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
-  ...compat.plugins("prettier"),
+  // Base Next.js and TypeScript configuration
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
+
+  // Global ignores
   {
     ignores: [
-      "prisma/generated/**",
+      "generated/**",
       "next-env.d.ts",
       "node_modules/**",
       ".next/**",
@@ -27,24 +25,33 @@ const eslintConfig = [
       "*.min.js",
     ],
   },
+
+  // Custom rules and plugins
   {
     plugins: {
       "unused-imports": unusedImports,
+      prettier: prettier,
     },
     rules: {
+      // Prettier integration
       "prettier/prettier": "error",
-      "@typescript-eslint/no-unused-vars": "off",
+
+      // Unused imports - configured for auto-fix
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": [
-        "warn",
+        "error",
         {
           vars: "all",
           varsIgnorePattern: "^_",
-          args: "after-used",
+          args: "none", // Don't check function arguments
           argsIgnorePattern: "^_",
           caughtErrorsIgnorePattern: "^_",
+          destructuredArrayIgnorePattern: "^_",
         },
       ],
+
+      // Disable base ESLint unused-vars since we're using unused-imports
+      "@typescript-eslint/no-unused-vars": "off",
     },
   },
 ];

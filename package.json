@@ -8,7 +8,7 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "check": "pnpm lint --fix && pnpm tsc --noEmit",
+    "check": "pnpm tsc --noEmit && pnpm lint --fix",
     "db:up": "docker-compose -f prisma/docker-compose.yml up -d"
   },
   "dependencies": {
